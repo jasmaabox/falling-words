@@ -8,30 +8,35 @@ var Engine = Matter.Engine,
 	Bodies = Matter.Bodies,
 	Runner = Matter.Runner;
 
-var textStr = "化物語";
+var textStr;
 	
 // canvas and engine	
 var canvas = document.getElementById("render-canvas")
 var context = canvas.getContext("2d");
 
 var engine = Engine.create();
-var render = Render.create({
-	element: document.body,
-	engine: engine
-});
+var boxes;
 
-// boxes and ground
-var boxes = [
-	Bodies.rectangle(400, 200, 60, 60),
-	Bodies.rectangle(410, 50, 60, 60),
-	Bodies.rectangle(420, 80, 60, 60)
-];
-var ground = Bodies.rectangle(400, 610, 810, 60, {isStatic: true});
+function reset(){
+	textStr = document.getElementById("query").value;
+	
+	var engine = Engine.create();
+	World.clear(engine.world);
+	Engine.clear(engine);
+	
+	// boxes and ground
+	boxes = [];
+	
+	for(var i=0; i < textStr.length; i++){
+		boxes.unshift(Bodies.rectangle(canvas.width/2+60*Math.random(), canvas.height-50*i, 60, 60))
+	}
+	
+	var ground = Bodies.rectangle(400, 610, 810, 60, {isStatic: true});
 
-// add items to world and run
-World.add(engine.world, boxes.concat([ground]));	
-Engine.run(engine);
-Render.run(render);
+	// add items to world and run
+	World.add(engine.world, boxes.concat([ground]));	
+	Engine.run(engine);
+}
 
 // I'm lazy
 setInterval(function(){
@@ -42,7 +47,7 @@ setInterval(function(){
 	
 	context.font = "60px Arial";
 	
-	for (var i=0; i < 3; i++){
+	for (var i=0; i < textStr.length; i++){
 		context.save();
 		context.translate(boxes[i].position.x-30, boxes[i].position.y-30);
 		context.rotate(boxes[i].angle);
@@ -50,6 +55,4 @@ setInterval(function(){
 		context.fillText(textStr[i], boxes[i].position.x, boxes[i].position.y);
 		context.restore();
 	}
-	
-	
 }, 1);

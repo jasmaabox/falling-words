@@ -3,22 +3,25 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Hi this is physics</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Falling Words</title>
 	</head>
 
-	<body>
-	
-		<h1>This is a test</h1>
-	
-		Enter words here:
-		<input type="text" name="query">
-		<button onclick="reset()">Reset</button>
-		<br>
-		<br>
-		<canvas id="render-canvas" width="800" height="600"></canvas>
+	<body onload="reset()">
+		<div class="container-fluid" align="center">
+			<h1>Falling Words</h1>
+			
+			<input type="text" id="query" value="test">
+			<br>
+			<button onclick="reset()" class="btn btn-info">Reset</button>
+			<br>
+			<br>
+			<canvas id="render-canvas" width="800" height="600"></canvas>
+		</div>
 	
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.12.0/matter.js"></script>
 		<script src="script.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</body>
 </html>
